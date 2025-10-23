@@ -24,7 +24,7 @@ jobs:
       env:
         API_KEY: ${{ secrets.GOOGLE_MAPS_API }}
       run: |
-        python adress_checker.py
+        python address_checker.py
 
     - name: Output als Download verfügbar machen
       uses: actions/upload-artifact@v4
