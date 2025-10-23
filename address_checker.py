@@ -4,7 +4,7 @@ import time
 
 API_KEY = os.environ.get("MAPS_API_KEY")
 
-df = pd.read_csv('data/addresses.csv')
+df = pd.read_csv('data/addresses_template.csv')
 
 def build_address(row):
     return f"{row['Street']} {row['House']}, {row['PostalCode']} {row['City']}, {row['Country']}"
