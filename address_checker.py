@@ -7,7 +7,7 @@ import time
 API_KEY = os.environ.get("API_KEY")
 
 # ✅ CSV mit Adressen laden (Pfad anpassen falls anders)
-df = pd.read_csv('addresses_template.csv')
+df = pd.read_csv('data/addresses_template.csv')
 
 def build_address(row):
     """Baut die vollständige Adresse korrekt zusammen."""
