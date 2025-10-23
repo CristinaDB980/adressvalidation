@@ -1,0 +1,33 @@
+name: Run Address Verifier
+
+on:
+  workflow_dispatch:   # erlaubt manuellen Start im GitHub-Interface
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Repository klonen
+      uses: actions/checkout@v3
+
+    - name: Python installieren
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Dependencies installieren
+      run: |
+        pip install -r requirements.txt
+
+    - name: Script ausführen
+      env:
+        API_KEY: ${{ secrets.GOOGLE_MAPS_API }}
+      run: |
+        python main.py
+
+    - name: Output als Download verfügbar machen
+      uses: actions/upload-artifact@v3
+      with:
+        name: results
+        path: output.csv
