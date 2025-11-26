@@ -3,7 +3,7 @@ import time
 from urllib.parse import quote
 import pandas as pd
 import requests
-import openpyxl
+
 
 # ── Konfiguration ─────────────────────────────────────────────────────────────
 API_KEY = os.getenv("API_KEY")
