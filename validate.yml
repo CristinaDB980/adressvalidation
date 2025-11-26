@@ -22,3 +22,5 @@ jobs:
         with:
           name: address-results
           path: results/output.csv
+      - name: Install Excel dependencies
+        run: pip install openpyxl
