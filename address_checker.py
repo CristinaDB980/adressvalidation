@@ -7,8 +7,8 @@ import requests
 # ── Konfiguration ─────────────────────────────────────────────────────────────
 API_KEY = os.getenv("API_KEY")
 INPUT_CANDIDATES = [
-    "data/addresses_template.csv",
-    "addresses_template.csv"
+    "data/addresses_template.xlsx",
+    "addresses_template.xlsx"
 ]
 OUTPUT_FILE = "output.csv"
 RADIUS_METERS = 50
@@ -37,14 +37,26 @@ PRIORITY_KEYWORDS = [
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 def load_input_df() -> pd.DataFrame:
-    last_err = None
+    """
+    Lädt automatisch CSV ODER Excel.
+    Sonderzeichen bleiben erhalten.
+    """
     for path in INPUT_CANDIDATES:
         try:
-            # sep=None lässt Pandas Auto-Detection machen
+            # 1) Excel (.xlsx / .xls)
+            if path.lower().endswith((".xlsx", ".xls")):
+                return pd.read_excel(path, dtype=str, keep_default_na=False)
+
+            # 2) CSV
             return pd.read_csv(path, sep=None, engine="python", dtype=str, keep_default_na=False)
+
+        except FileNotFoundError:
+            continue
         except Exception as e:
-            last_err = e
-    raise FileNotFoundError(f"Keine Eingabedatei gefunden. Versucht: {INPUT_CANDIDATES}. Fehler: {last_err}")
+            print(f"Fehler beim Laden von {path}: {e}")
+
+    raise FileNotFoundError(f"Keine Eingabedatei gefunden. Versucht: {INPUT_CANDIDATES}")
+
 
 def safe_str(x) -> str:
     return "" if x is None else str(x).strip()
