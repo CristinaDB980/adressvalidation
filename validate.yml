@@ -21,6 +21,13 @@ jobs:
           API_KEY: ${{ secrets.GOOGLE_MAPS_API }}
         run: python code/address_checker.py
 
+      - name: Debug – verify output file
+        run: |
+          echo "PWD:"
+          pwd
+          echo "List files:"
+          ls -R .
+
       - name: Upload result
         uses: actions/upload-artifact@v3
         with:
