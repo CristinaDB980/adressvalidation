@@ -12,14 +12,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: Debug – List workspace
-        run: |
-          echo "Ich liste alles im Arbeitsverzeichnis:"
-          pwd
-          ls -R .
-          echo "Suche results/output.csv explizit:"
-          find . -name "output.csv"
-
       - name: Install dependencies
         run: pip install -r requirements.txt
 
@@ -36,7 +28,8 @@ jobs:
           ls -R .
 
       - name: Upload result
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: address-results
+          name: results
           path: results/output.csv
+          if-no-files-found: error
