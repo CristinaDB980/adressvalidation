@@ -21,11 +21,11 @@ jobs:
           API_KEY: ${{ secrets.GOOGLE_MAPS_API }}
         run: python code/address_checker.py
 
-      - name: Debug – verify output file
+      - name: Debug – list workspace
         run: |
-          echo "PWD:"
+          echo "PWD:" 
           pwd
-          echo "List files:"
+          echo "Files:"
           ls -R .
 
       - name: Upload result
